@@ -27,7 +27,7 @@ const cardMap = {
     'A': 14
 }
 
-function getHandType(hand) {
+function getHandType(hand,jokers=false) {
     let cards = {}
     let type;
     hand.split('').forEach(card => {
@@ -37,6 +37,10 @@ function getHandType(hand) {
             cards[card]=1
         }
     });
+
+    if(jokers) {
+        cards = accountForJokers(cards)
+    }
 
     let cardCounts = Object.values(cards)
     let uniqueCards = cardCounts.length
@@ -57,18 +61,22 @@ function getHandType(hand) {
     return type
 }
 
-function playCamelCards(input) {
+function playCamelCards(input,jokers=false) {
     let data = convertTxtToArray(input).map(line => {
         let round = line.split(' ')
         return {
             hand: round[0],
             bid: parseInt(round[1]),
-            type: getHandType(round[0])
+            type: getHandType(round[0],jokers)
         }
     })
 
+    if(jokers) {
+        cardMap['J'] = 1
+    }
+
     data.sort(sortByTypeAndHighCard)
-    
+    // console.log(data)
     let result = data.reduce((total,game,index) => {
         return total += game.bid*(index+1)
     },0)
@@ -90,4 +98,14 @@ function sortByTypeAndHighCard(a,b) {
     }
 }
 
-playCamelCards('./input.txt')
+function accountForJokers(cards) {
+    if(cards['J'] && cards['J'] < 5) {
+        let jNum = cards['J']
+        delete(cards['J'])
+        let largest = Object.entries(cards).sort((a,b)=>b[1]-a[1])[0][0]
+        cards[largest] += jNum
+    }
+    return cards
+}
+
+playCamelCards('./input.txt',true)
