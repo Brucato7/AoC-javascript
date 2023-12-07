@@ -1,0 +1,60 @@
+{
+    "job_posting": {
+        "company": "TripleBlind",
+        "position": "Front End Developer",
+        "description": "TripleBlind is looking for a Front-end Developer to join our team and help us build amazing web interfaces. We're looking for someone who is passionate about the web and loves to code. If you are a highly-skilled Front-end Developer, we want to hear from you! What you will do as a Front End Developer at TripleBlind: Create the main interface experience for our customers Build modern web user interfaces using JavaScript, TypeScript, React, Material UI, and other frameworks that may be used Assist in defining the TripleBlind API and user experience Become part of a team of highly experienced engineers and designers Collaborate using Github as part of an Agile development team Use Docker containers for shipping to the major cloud platforms Learn about encryption, machine learning other cutting edge technologies You should apply if you: Understand design principles and love creating attractive, usable interfaces Understand that UI and UX are not the same and can create a great experience Prefer finding solutions to problems, not just being told them Like the pace of a startup -- or want to learn what that means Are organized, have a high attention to detail, and are good at prioritizing and juggling multiple work streams. Have excellent communication skills (written and verbal) that are modified to meet the needs, level of expertise and sophistication of the audience. Take initiative and have the ability to drive projects to successful completion. Are self-directed and self-motivated, always looking for new ways to contribute to the success of the team. Are a team player that is as dedicated to the team effort as you are to your own success."
+    },
+
+    "resume": {
+        "work_history": [
+            {
+                "start_date":"August, 2022",
+                "end_date":"September, 2023",
+                "company":"Paper",
+                "title":"Data Services Engineer",
+                "location": "Montreal, QC",
+                "summary":"Created an internal Vue.js toolkit, hosted in GCP, to validate and ingest student data. The toolkit decreased the average data task time from several hours to a few minutes. The toolkit connected to the Box API to keep student data secure in cloud storage. Created a custom Excel script, using TypeScript, to aid the team in validating complex course history files. Also created a Node version to run files outside Excel's limitations."
+            },
+            {
+                "start_date":"May, 2022",
+                "end_date":"July, 2022",
+                "company":"Thimble",
+                "title":"Lead Web Developer",
+                "location":"New York, NY",
+                "summary":"Created documentation for Web Developer processes using Coda. Created a custom WordPress plugin to help our content team identify stale posts. Created Coding standards and explored formatting automation. Helped transition Google Analytics events to be compatible with GA4"
+            },
+            {
+                "start_date":"July, 2019",
+                "end_date":"May, 2022",
+                "company":"Custom Offsets",
+                "title":"Lead Web Developer",
+                "location":"Appleton, WI",
+                "summary":"Led agile web development teams in weekly sprints. Led teams in the completion of major initiatives, such as launching the Anovia Wheels website, adding product lines to the custom Offsets site, and launching the Function Powersports website. Created Monday.com boards, automations and dashboards to support digital sprints and burn charts."
+            },
+            {
+                "start_date":"September, 2018",
+                "end_date":"July, 2019",
+                "company":"Custom Offsets",
+                "title":"Web Developer",
+                "location":"Appleton, WI",
+                "summary":"Improved our websites using PHP, JS, Doctrine, MySQL, HTML, CSS, Git, AWS. Helped create and launch the ARKON OFF-ROAD website. Created a custom solution for gift card redemption."
+            }
+        ],
+        "education": [
+            {
+                "name": "University of Wisconsin-Oshkosh",
+                "start_date": "September, 2009",
+                "end_date": "May, 2013",
+                "degree": "Bachelors",
+                "field": "Theatre"
+            },
+            {
+                "name": "devCodeCamp",
+                "start_date": "July, 2016",
+                "end_date": "August, 2016",
+                "degree": "Certificate",
+                "field": "Full Stack JavaScript"
+            }
+        ]
+    }
+}
