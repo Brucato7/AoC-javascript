@@ -1,3 +1,4 @@
+const fs = require('fs')
 const { start } = require('repl')
 const {convertTxtToString} = require('../../utilities/read-input')
 
@@ -16,6 +17,16 @@ const {convertTxtToString} = require('../../utilities/read-input')
  * bottom -> 2  = [1,0]
  * left -> 3    = [0,-1]
  */
+
+const symbolPipes = {
+    '7':'╗',
+    'J':'╝',
+    'S':'╝',
+    'L':'╚',
+    'F':'╔',
+    '-':'═',
+    '|':'║'
+}
 
 const directions = [
     [-1,0],
@@ -51,17 +62,48 @@ function getStartingNodeAndData(file) {
 function mapPipes(file) {
     const {data,startingNode} = getStartingNodeAndData(file)
 
-    let previousNode = startingNode
-    let currentNode = findConnectingNode(startingNode,data)
-    let counter = 1
-    while(currentNode[0] != startingNode[0] || currentNode[1] != startingNode[1]) {
-        counter++
-        let nextNode = travelToNextNode(currentNode,previousNode,data)
-        previousNode = currentNode
-        currentNode = nextNode
+    const path = [startingNode,findConnectingNode(startingNode,data)]
+
+    while(path[path.length-1][0] != startingNode[0] || path[path.length-1][1] != startingNode[1]) {
+        let nextNode = travelToNextNode(path[path.length-1],path[path.length-2],data)
+        path.push(nextNode)
     }
-    console.log(counter)
-    console.log(counter/2)
+
+    // Slice off last node since the startingNode is pushed twice.
+    const vertices = path.slice(0,-1).filter(node => {
+        let row = node[0]
+        let col = node[1]
+        return ['7','J','L','F','S'].includes(data[row][col])
+    })
+
+    let area = shoelace(vertices)
+
+    let interiorPoints = area - ((path.length - 1)/2) + 1
+    console.log(interiorPoints)
+
+    // Built a visualization to help conceptualize and debug
+    // const pipeMap = {}
+    // path.forEach(node => {
+    //     if(node[0] in pipeMap) {
+    //         pipeMap[node[0]].push(node[1])
+    //     } else {
+    //         pipeMap[node[0]] = [node[1]]
+    //     }
+    // })
+
+    // let outputMap = data.map((line,index)=>{
+    //     let newLine = ''
+    //     for(let i=0;i<line.length;i++){
+    //         if(index in pipeMap && pipeMap[index].includes(i)) {
+    //             newLine += symbolPipes[line[i]]
+    //         } else {
+    //             newLine += "$"
+    //         }
+    //     }
+    //     return newLine
+    // })
+
+    // fs.writeFile('./output.txt',outputMap.join('\n'),()=>{})
 }
 
 function findConnectingNode(node, data) {
@@ -89,4 +131,17 @@ function travelToNextNode(curr,prev,data) {
 }
 
 
+function shoelace(vertices) {
+    let area = 0
+    for(let i=0;i<vertices.length;i++) {
+        let nextIndex = (i+1) % vertices.length
+        if(vertices[nextIndex] == undefined) console.log(i,vertices.length,nextIndex)
+        let [x,y] = vertices[i]
+        let [x1,y1] = vertices[nextIndex]
+        area += (x1 + x) * (y1 - y)
+    }
+    return Math.abs(area)/2
+}
+
 mapPipes('./input.txt')
+
