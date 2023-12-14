@@ -81,6 +81,42 @@ function sumOfShortestPaths(data) {
     console.log(sum)
 }
 
+function filterExpansions(num1, num2, expansions) {
+    let x1 = (num1 > num2) ? num1 : num2
+    let x2 = (num1 > num2) ? num2 : num1
+
+    return expansions.filter(x => x < x1 && x > x2).length
+}
+
+function sumOfShortestPathsWithMillions(data) {
+    const {rows,cols} = findExpansions(data)
+
+    const galaxyNodes = []
+
+    data.forEach((line,index)=>{
+        for(let i=0; i<line.length;i++) {
+            if(line[i] == '#') {
+                galaxyNodes.push([index,i])
+            }
+        }
+    })
+
+    let sum = 0
+
+    for(let g=0;g<galaxyNodes.length;g++) {
+        let [x1,y1] = galaxyNodes[g]
+
+        for(let p=g+1;p<galaxyNodes.length;p++) {
+            let [x2,y2] = galaxyNodes[p]
+            let expansionsX = filterExpansions(x1,x2,rows)
+            let expansionsY = filterExpansions(y1,y2,cols)
+            sum += (Math.abs(x1-x2) + Math.abs(y1-y2)) + ((expansionsX + expansionsY) * 999999)
+        }
+    }
+
+    console.log(sum)
+}
+
 const data = convertTxtToArray('./input.txt')
 
-sumOfShortestPaths(data)
+sumOfShortestPathsWithMillions(data)
